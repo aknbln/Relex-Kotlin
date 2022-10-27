@@ -3,12 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ScanFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/scannable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/before_scan_foreground"
+            android:contentDescription="receipt that will be scanned"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="119dp"
+            android:layout_gravity="bottom"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/scan_button"
+            app:layout_constraintBottom_toBottomOf="@+id/scannable"
+            app:layout_constraintEnd_toEndOf="@+id/scannable"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
