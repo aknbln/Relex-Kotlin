@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //supportActionBar?.hide()
+        //setSupportActionBar(findViewById(R.id.my_toolbar))
         loadFragment(MapsFragment())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnNavigationItemSelectedListener {
