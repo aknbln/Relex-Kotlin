@@ -68,4 +68,12 @@ class ScannedFragment : Fragment() {
                 }
             }
     }
+    /**
+     * This fragment lifecycle method is called when the view hierarchy associated with the fragment
+     * is being removed. As a result, clear out the binding object.
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
