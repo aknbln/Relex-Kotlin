@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.relex20.databinding.FragmentScanBinding
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -41,9 +41,11 @@ class ScanFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentScanBinding.inflate(inflater, container, false)
 //        return inflater.inflate(R.layout.fragment_scan, container, false)
+
+
         val root: View = binding.root
         binding.scan.setOnClickListener{
-            findNavController().navigate(R.id.action_scanFragment_to_scannedFragment)
+            findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
         }
         return root
 
@@ -68,6 +70,16 @@ class ScanFragment : Fragment() {
                 }
             }
     }
+
+//    private fun loadFragment(fragment: Fragment){
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.remove(curFragment)
+//        transaction.add( R.id.container, fragment)
+//        curFragment = fragment
+////        transaction.replace(R.id.container, fragment)
+////        transaction.addToBackStack(null)
+//        transaction.commit()
+//    }
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
      * is being removed. As a result, clear out the binding object.

@@ -44,7 +44,7 @@ class ScannedFragment : Fragment() {
 //        return inflater.inflate(R.layout.fragment_scan, container, false)
         val root: View = binding.root
         binding.submitReceipt.setOnClickListener {
-            findNavController().navigate(R.id.action_scannedFragment_to_mainActivity)
+//            findNavController().navigate(R.id.)
         }
         return root
     }

@@ -3,29 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/scanFragment">
-
+    app:startDestination="@id/mapsFragment">
     <fragment
-        android:id="@+id/scanFragment"
+        android:id="@+id/mapsFragment"
+        android:name="com.example.relex20.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_scanFragment2"
+            app:destination="@id/scanFragment2" />
+        <action
+            android:id="@+id/action_mapsFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanFragment2"
         android:name="com.example.relex20.ScanFragment"
         android:label="fragment_scan"
         tools:layout="@layout/fragment_scan" >
         <action
-            android:id="@+id/action_scanFragment_to_scannedFragment"
-            app:destination="@id/scannedFragment" />
+            android:id="@+id/action_scanFragment2_to_scannedFragment2"
+            app:destination="@id/scannedFragment2" />
+        <action
+            android:id="@+id/action_scanFragment2_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
-        android:id="@+id/scannedFragment"
+        android:id="@+id/scannedFragment2"
         android:name="com.example.relex20.ScannedFragment"
         android:label="fragment_scanned"
-        tools:layout="@layout/fragment_scanned" >
-        <action
-            android:id="@+id/action_scannedFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
-    </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.relex20.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/fragment_scanned" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.relex20.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>
