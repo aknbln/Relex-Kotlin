@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-//                R.id.maps -> {
-//                    loadFragment(MapsFragment())
-//                    true
-//                }
+                R.id.maps -> {
+                    loadFragment(MapsFragment())
+                    true
+                }
                 R.id.scan -> {
 
                     //navController.navigate(R.id.action_mapsFragment_to_scanFragment2)

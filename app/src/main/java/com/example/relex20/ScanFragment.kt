@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.relex20.databinding.FragmentScanBinding
@@ -42,10 +43,11 @@ class ScanFragment : Fragment() {
         _binding = FragmentScanBinding.inflate(inflater, container, false)
 //        return inflater.inflate(R.layout.fragment_scan, container, false)
 
-
         val root: View = binding.root
         binding.scan.setOnClickListener{
-            findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
+            //findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
+            Toast.makeText(context,
+                "Scanned!", Toast.LENGTH_SHORT).show()
         }
         return root
 
