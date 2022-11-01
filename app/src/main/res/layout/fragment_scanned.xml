@@ -21,9 +21,9 @@
             android:layout_width="314dp"
             android:layout_height="60dp"
             android:background="@android:color/white"
+            android:text="Submit"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:text="Submit"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
