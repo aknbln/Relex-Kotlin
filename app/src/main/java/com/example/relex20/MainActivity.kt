@@ -10,10 +10,11 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
-import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.relex20.model.TransactionViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private val sharedTransactionViewModel: TransactionViewModel by viewModels()
 
     // Monitors connection to the while-in-use service.
     private val foregroundOnlyServiceConnection = object : ServiceConnection {
@@ -57,10 +59,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         //supportActionBar?.hide()
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        curFragment = MapsFragment()
+        curFragment = AccountFragment()
 
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
-
         sharedPreferences =
             getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
@@ -108,9 +109,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         // Updates button states if new while in use location is added to SharedPreferences.
         if (key == SharedPreferenceUtil.KEY_FOREGROUND_ENABLED) {
-            updateButtonState(sharedPreferences.getBoolean(
-                SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
-            )
+//            updateButtonState(sharedPreferences.getBoolean(
+//                SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
+//            )
         }
     }
 
@@ -126,9 +127,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onStart() {
         super.onStart()
 
-        updateButtonState(
-            sharedPreferences.getBoolean(SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
-        )
+//        updateButtonState(
+//            sharedPreferences.getBoolean(SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
+//        )
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
         val serviceIntent = Intent(this, ForegroundOnlyLocationService::class.java)
@@ -220,7 +221,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     foregroundOnlyLocationService?.subscribeToLocationUpdates()
                 else -> {
                     // Permission denied.
-                    updateButtonState(false)
+//                    updateButtonState(false)
 
                     Snackbar.make(
                         findViewById(R.id.activity_main),
@@ -246,13 +247,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    private fun updateButtonState(trackingLocation: Boolean) {
-        if (trackingLocation) {
-            foregroundOnlyLocationButton.text = getString(R.string.stop_location_updates_button_text)
-        } else {
-            foregroundOnlyLocationButton.text = getString(R.string.start_location_updates_button_text)
-        }
-    }
+//    private fun updateButtonState(trackingLocation: Boolean) {
+//        if (trackingLocation) {
+//
+////        } else {
+////            foregroundOnlyLocationButton.text = getString(R.string.start_location_updates_button_text)
+////        }
+//        }
+//    }
 
 
 
@@ -265,6 +267,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             val location = intent.getParcelableExtra<Location>(
                 ForegroundOnlyLocationService.EXTRA_LOCATION
             )
+            println("location received")
+            if(location != null){
+                sharedTransactionViewModel.setCurLocation(location)
+
+            }
 
         }
     }
