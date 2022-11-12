@@ -1,11 +1,18 @@
 package com.example.relex20
 
+import android.content.ComponentName
+import android.content.ServiceConnection
+import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
-
+import android.content.BroadcastReceiver
+import android.location.Location
 import android.os.Bundle
+import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,7 +21,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(){
+
+
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -26,6 +36,16 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+
+        val curLocation: Location? = ForegroundOnlyLocationService().currentLocation
+
+
+//        if (curLocation != null) {
+//            println(curLocation.latitude)
+//            println(curLocation.longitude)
+//        };
+//        println("here")
+
         val sydney = LatLng(-34.0, 151.0)
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
@@ -44,4 +64,6 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
+
 }
