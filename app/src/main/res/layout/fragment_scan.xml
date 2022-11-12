@@ -12,13 +12,18 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/scannable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/before_scan_foreground"
+            android:layout_marginBottom="8dp"
             android:contentDescription="receipt that will be scanned"
-            />
+            android:src="@mipmap/before_scan_foreground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/scan"
@@ -30,6 +35,19 @@
             app:layout_constraintBottom_toBottomOf="@id/scannable"
             app:layout_constraintEnd_toEndOf="@id/scannable"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="56dp"
+            android:backgroundTint="@color/white"
+            android:text="Take Picture"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scannable" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
