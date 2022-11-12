@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNav : BottomNavigationView
     private lateinit var navController: NavController
     private lateinit var curFragment: Fragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
