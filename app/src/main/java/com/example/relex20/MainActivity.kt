@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //supportActionBar?.hide()
         setSupportActionBar(findViewById(R.id.my_toolbar))
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
-        setupActionBarWithNavController(navController)
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+//        navController = navHostFragment.findNavController()
+//        setupActionBarWithNavController(navController)
 
         curFragment = MapsFragment()
         loadFragment(curFragment)
