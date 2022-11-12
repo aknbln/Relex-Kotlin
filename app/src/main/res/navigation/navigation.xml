@@ -21,18 +21,11 @@
         android:name="com.example.relex20.ScanFragment"
         android:label="fragment_scan"
         tools:layout="@layout/fragment_scan" >
-        <action
-            android:id="@+id/action_scanFragment2_to_scannedFragment2"
-            app:destination="@id/scannedFragment2" />
+
         <action
             android:id="@+id/action_scanFragment2_to_accountFragment"
             app:destination="@id/accountFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/scannedFragment2"
-        android:name="com.example.relex20.ScannedFragment"
-        android:label="fragment_scanned"
-        tools:layout="@layout/fragment_scanned" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.relex20.AccountFragment"

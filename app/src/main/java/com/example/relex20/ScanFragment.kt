@@ -44,6 +44,7 @@ class ScanFragment : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,8 +56,8 @@ class ScanFragment : Fragment() {
         val root: View = binding.root
         binding.scan.setOnClickListener{
             //findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
-            Toast.makeText(context,
-                "Scanned!", Toast.LENGTH_SHORT).show()
+            val bottomSheet = BottomSheet();
+            bottomSheet.show(getParentFragmentManager(), "TAG");
         }
         binding.camera.setOnClickListener{
             if (ContextCompat.checkSelfPermission(
