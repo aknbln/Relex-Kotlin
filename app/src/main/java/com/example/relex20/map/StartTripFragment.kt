@@ -94,7 +94,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                     } else {
                         // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
                         if (foregroundPermissionApproved()) {
-                            (activity as MainActivity?)?.loadFragment(MapsFragment())
+
                             foregroundOnlyLocationService?.subscribeToLocationUpdates()
                                 ?: Log.d(TAG, "Service Not Bound")
 
@@ -261,7 +261,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
             println("location received")
             if(location != null){
                 sharedViewModel.setCurLocation(location)
-
+                (activity as MainActivity?)?.loadFragment(MapsFragment())
             }
 
         }

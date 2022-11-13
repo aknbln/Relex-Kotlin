@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Transformations.map
 import com.example.relex20.R
 import com.example.relex20.model.TransactionViewModel
 import com.example.relex20.toText
