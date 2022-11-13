@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
     <!--add child views-->
 
 <androidx.fragment.app.FragmentContainerView xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +16,7 @@
     android:layout_height="match_parent"
     tools:context=".map.MapsFragment"
     tools:layout="@layout/fragment_maps"
+
     />
 
 
@@ -70,7 +73,7 @@
                 android:layout_toEndOf="@+id/from_circle1"
                 android:background="@drawable/rounded_edittext"
                 android:paddingHorizontal="5dp"
-                android:text="Current Location"
+                android:text="@string/current_location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <EditText
@@ -85,9 +88,10 @@
                 android:layout_toEndOf="@+id/from_circle1"
                 android:background="@drawable/rounded_edittext"
                 android:paddingHorizontal="5dp"
-                android:hint= "Destination"
+                android:hint= "@string/destination"
                 android:inputType="text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:imeOptions="actionGo"
                 />
 
             <TextView
@@ -100,17 +104,18 @@
                 android:layout_centerHorizontal="true"
 
                 android:layout_marginVertical="5dp"
-                android:text="Trip Cost:"
+                android:text="@string/trip_cost"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 />
 
             <TextView
+                android:id="@+id/tripcost_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:layout_alignEnd="@id/destination"
                 android:layout_below="@id/destination"
-                android:text="0.00$"
+                android:text="@string/_0_00"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
 
