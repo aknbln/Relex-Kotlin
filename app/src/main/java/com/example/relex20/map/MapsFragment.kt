@@ -1,23 +1,17 @@
-package com.example.relex20
+package com.example.relex20.map
 
-import android.content.ComponentName
-import android.content.ServiceConnection
-import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
-import android.content.BroadcastReceiver
 import android.location.Location
 import android.os.Bundle
-import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import com.example.relex20.R
 import com.example.relex20.model.TransactionViewModel
+import com.example.relex20.toText
 
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
