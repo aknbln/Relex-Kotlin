@@ -162,7 +162,7 @@ class MapsFragment : Fragment(){
                             println(sharedViewModel.distance.value)
 
                             // on below line we are adding marker to that position.
-                            mMap?.addMarker(MarkerOptions().position(dest).title(location))
+                             mMap?.addMarker(MarkerOptions().position(dest).title(location))
 
                             val builder = LatLngBounds.Builder()
                             curPosition?.let { builder.include(it) }
@@ -170,7 +170,6 @@ class MapsFragment : Fragment(){
 
                             val bounds = builder.build()
                             val width = resources.displayMetrics.widthPixels
-                            val height = resources.displayMetrics.heightPixels
 
 
                             val padding = width * 0.3 // offset from edges of the map in pixels
