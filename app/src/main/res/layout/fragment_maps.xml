@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.relex20.model.TransactionViewModel" />
+    </data>
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-    <!--add child views-->
-
-<androidx.fragment.app.FragmentContainerView xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".map.MapsFragment"
-    tools:layout="@layout/fragment_maps"
-
-    />
+     android:layout_width="match_parent">
 
 
+    <androidx.fragment.app.FragmentContainerView xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".map.MapsFragment"
+        tools:layout="@layout/fragment_maps"
+        />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -87,12 +86,12 @@
                 android:layout_marginEnd="20dp"
                 android:layout_toEndOf="@+id/from_circle1"
                 android:background="@drawable/rounded_edittext"
-                android:paddingHorizontal="5dp"
-                android:hint= "@string/destination"
-                android:inputType="text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="@string/destination"
                 android:imeOptions="actionGo"
-                />
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:paddingHorizontal="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/trip"
@@ -101,12 +100,11 @@
                 android:layout_below="@+id/destination"
                 android:layout_alignBottom="@id/myRectangleView"
 
-                android:layout_centerHorizontal="true"
-
                 android:layout_marginVertical="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/tripcost_amount"
                 android:text="@string/trip_cost"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
                 android:id="@+id/tripcost_amount"
@@ -119,6 +117,31 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/destination"
 
+                android:layout_alignStart="@id/myRectangleView"
+                android:layout_marginStart="20dp"
+                android:layout_marginVertical="5dp"
+                android:text="@string/distance_remaining"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                />
+
+            <TextView
+                android:id="@+id/destination_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/distance"
+                android:layout_below="@id/destination"
+                android:text="@{viewModel.getFormattedDistance()}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+
+        </RelativeLayout>
 </FrameLayout>
+</layout>

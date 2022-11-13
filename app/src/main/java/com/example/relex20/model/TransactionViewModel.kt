@@ -7,13 +7,17 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import java.text.NumberFormat
+import java.util.*
 
 class TransactionViewModel : ViewModel() {
 
     // Default tax rate
     private val taxRate = 0.08
 
+    //for tripStart Fragment tracking
     var tripStarted = false
+
+
     private val _location = MutableLiveData<Location?>()
     val location: LiveData<Location?> = _location
 
@@ -23,6 +27,10 @@ class TransactionViewModel : ViewModel() {
     // tripCost for the transaction
     private val _tripCost = MutableLiveData<Double?>()
     val tripCost: LiveData<Double?> = _tripCost
+
+    // distance remaining for the transaction
+    private val _distance = MutableLiveData<Double?>()
+    val distance: LiveData<Double?> = _distance
 
     // scannedCosts for the transaction
     private val _scannedCosts = MutableLiveData<Double?>()
@@ -51,6 +59,35 @@ class TransactionViewModel : ViewModel() {
 
 
     }
+
+    /**
+     * Set curLocation.
+     */
+    fun setDistance(distance: Double) {
+
+        _distance.value = distance
+        //update Total
+//        updateTotal(_location.value)
+
+
+    }
+
+    fun getFormattedDistance(): String {
+        return if(distance.value != null) {
+            val formatter = NumberFormat.getNumberInstance()
+            formatter.minimumFractionDigits = 2
+            formatter.maximumFractionDigits = 2
+            distance.value?.let { formatter.format(it.toDouble()) } + " km"
+        }else{
+            "0 km"
+        }
+    }
+
+    /**
+     * Getter method for price.
+     * Includes formatting.
+     */
+    fun getFormattedPrice(): String = NumberFormat.getCurrencyInstance().format(_total.value)
 
     fun setDestination(location: LatLng) {
 

@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
+import com.google.maps.android.SphericalUtil
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -86,7 +87,10 @@ class MapsFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
+        binding.apply {
+            viewModel = sharedViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
 
         //For route https://www.geeksforgeeks.org/how-to-generate-route-between-two-locations-in-google-map-in-android/
 
@@ -148,6 +152,11 @@ class MapsFragment : Fragment(){
 
                             //save destination to the viewmodel
                             sharedViewModel.setDestination(dest)
+
+                            //make it a mutable data, set it on xml file
+                            val totalDistance: Double = SphericalUtil.computeDistanceBetween(curPosition, dest);
+                            sharedViewModel.setDistance(totalDistance)
+                            println(sharedViewModel.distance.value)
 
                             // on below line we are adding marker to that position.
                             mMap?.addMarker(MarkerOptions().position(dest).title(location))
@@ -274,7 +283,6 @@ class MapsFragment : Fragment(){
     private inner class GetDirection(val url : String) : AsyncTask<Void, Void, List<List<LatLng>>>(){
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Void?): List<List<LatLng>> {
-
             val client = OkHttpClient()
             val request = Request.Builder().url(url).build()
             val response = client.newCall(request).execute()
@@ -289,7 +297,6 @@ class MapsFragment : Fragment(){
                 }
                 result.add(path)
             }catch (e:Exception){
-                println("THIS IS THE LIST THAT")
                 e.printStackTrace()
             }
             return result
