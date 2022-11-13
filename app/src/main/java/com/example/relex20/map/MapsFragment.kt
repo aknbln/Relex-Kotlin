@@ -289,6 +289,7 @@ class MapsFragment : Fragment(){
                 }
                 result.add(path)
             }catch (e:Exception){
+                println("THIS IS THE LIST THAT")
                 e.printStackTrace()
             }
             return result

@@ -261,6 +261,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
             println("location received")
             if(location != null){
                 sharedViewModel.setCurLocation(location)
+                sharedViewModel.tripStarted = true
                 (activity as MainActivity?)?.loadFragment(MapsFragment())
             }
 

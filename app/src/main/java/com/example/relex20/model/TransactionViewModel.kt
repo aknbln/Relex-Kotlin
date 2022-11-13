@@ -13,6 +13,7 @@ class TransactionViewModel : ViewModel() {
     // Default tax rate
     private val taxRate = 0.08
 
+    var tripStarted = false
     private val _location = MutableLiveData<Location?>()
     val location: LiveData<Location?> = _location
 

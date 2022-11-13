@@ -13,6 +13,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.relex20.map.MapsFragment
 import com.example.relex20.map.StartTripFragment
@@ -27,7 +28,8 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var bottomNav : BottomNavigationView
     private lateinit var curFragment: Fragment
-
+    // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
+    private val sharedViewModel: TransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,12 @@ class MainActivity : AppCompatActivity(){
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.maps -> {
-                    loadFragment(MapsFragment())
+
+                    if(sharedViewModel.tripStarted) {
+                        loadFragment(MapsFragment())
+                    }else{
+                        loadFragment(StartTripFragment())
+                    }
                     true
                 }
                 R.id.scan -> {
