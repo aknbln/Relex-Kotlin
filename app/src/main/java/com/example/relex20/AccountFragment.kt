@@ -1,10 +1,17 @@
 package com.example.relex20
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import androidx.appcompat.app.AppCompatActivity
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +27,7 @@ class AccountFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +35,16 @@ class AccountFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        auth = FirebaseAuth.getInstance()
+
+        /* CODE FOR SIGN OUT BUTTON ---------
+        findViewById<Button>(R.id.signOutBtn).setOnClickListener {
+            auth.signOut()
+            startActivity(Intent(this , MainActivity::class.java))
+        }
+        */
+
     }
 
     override fun onCreateView(
