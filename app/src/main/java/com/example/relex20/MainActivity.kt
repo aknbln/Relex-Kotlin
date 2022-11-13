@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
@@ -30,27 +31,28 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        val signInSetUp = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this , gso)
+        googleSignInClient = GoogleSignIn.getClient(this , signInSetUp)
 
         findViewById<Button>(R.id.gSignInBtn).setOnClickListener {
-            signInGoogle()
+            googleSignIn()
         }
+
     }
-    private fun signInGoogle(){
+    private fun googleSignIn(){
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result ->
-        if (result.resultCode == Activity.RESULT_OK){
+            res ->
+        if (res.resultCode == Activity.RESULT_OK){
 
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            val task = GoogleSignIn.getSignedInAccountFromIntent(res.data)
             handleResults(task)
         }
     }
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             if (account != null){
                 updateUI(account)
             }
-        }else{
+        } else {
             Toast.makeText(this, task.exception.toString() , Toast.LENGTH_SHORT).show()
         }
     }
@@ -71,8 +73,6 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 val intent : Intent = Intent(this , HomeActivity::class.java)
-                intent.putExtra("email" , account.email)
-                intent.putExtra("name" , account.displayName)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, it.exception.toString() , Toast.LENGTH_SHORT).show()
