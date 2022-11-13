@@ -138,7 +138,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/distance"
                 android:layout_below="@id/destination"
-                android:text="@{viewModel.getFormattedDistance()}"
+                android:text="@{viewModel.distance}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
 

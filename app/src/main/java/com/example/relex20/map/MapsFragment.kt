@@ -85,12 +85,14 @@ class MapsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
         }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+
 
         //For route https://www.geeksforgeeks.org/how-to-generate-route-between-two-locations-in-google-map-in-android/
 

@@ -29,8 +29,13 @@ class TransactionViewModel : ViewModel() {
     val tripCost: LiveData<Double?> = _tripCost
 
     // distance remaining for the transaction
-    private val _distance = MutableLiveData<Double?>()
-    val distance: LiveData<Double?> = _distance
+    private val _distance = MutableLiveData(0.0)
+    val distance: LiveData<String> = Transformations.map(_distance) {
+        val formatter = NumberFormat.getNumberInstance()
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.format(it) + " km"
+    }
 
     // scannedCosts for the transaction
     private val _scannedCosts = MutableLiveData<Double?>()
