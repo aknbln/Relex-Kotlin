@@ -24,9 +24,6 @@ class TransactionViewModel : ViewModel() {
     private val _destination = MutableLiveData<LatLng?>()
     val destination: LiveData<LatLng?> = _destination
 
-    // tripCost for the transaction
-    private val _tripCost = MutableLiveData<Double?>()
-    val tripCost: LiveData<Double?> = _tripCost
 
     // distance remaining for the transaction
     private val _distance = MutableLiveData(0.0)
@@ -36,6 +33,16 @@ class TransactionViewModel : ViewModel() {
         formatter.maximumFractionDigits = 2
         formatter.format(it) + " km"
     }
+
+    // tripCost for the transaction
+    private val _tripCost = MutableLiveData(0.00)
+    val tripCost: LiveData<String> = Transformations.map(_distance) {
+
+        NumberFormat.getCurrencyInstance().format(it * taxRate)
+    }
+
+
+
 
     // scannedCosts for the transaction
     private val _scannedCosts = MutableLiveData<Double?>()
@@ -59,8 +66,7 @@ class TransactionViewModel : ViewModel() {
     fun setCurLocation(location: Location) {
 
         _location.value = location
-        //update Total
-//        updateTotal(_location.value)
+
 
 
     }
@@ -72,27 +78,12 @@ class TransactionViewModel : ViewModel() {
 
         _distance.value = distance
         //update Total
-//        updateTotal(_location.value)
+        updateTotal(_distance.value!! * taxRate)
 
 
     }
 
-    fun getFormattedDistance(): String {
-        return if(distance.value != null) {
-            val formatter = NumberFormat.getNumberInstance()
-            formatter.minimumFractionDigits = 2
-            formatter.maximumFractionDigits = 2
-            distance.value?.let { formatter.format(it.toDouble()) } + " km"
-        }else{
-            "0 km"
-        }
-    }
 
-    /**
-     * Getter method for price.
-     * Includes formatting.
-     */
-    fun getFormattedPrice(): String = NumberFormat.getCurrencyInstance().format(_total.value)
 
     fun setDestination(location: LatLng) {
 
@@ -108,16 +99,11 @@ class TransactionViewModel : ViewModel() {
      * Update subtotal value.
      */
     fun updateTotal(itemPrice: Double) {
-        // TODO: if _subtotal.value is not null, update it to reflect the price of the recently
-        //  added item.
-        //  Otherwise, set _subtotal.value to equal the price of the item.
         if(_total.value == null){
             _total.value = itemPrice
         }else{
             _total.value = _total.value!! + itemPrice
         }
         println("new subtotal: " + this._total.value)
-//        // TODO: calculate the tax and resulting total
-//        calculateTaxAndTotal()
     }
 }

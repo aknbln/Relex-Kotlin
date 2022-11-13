@@ -21,10 +21,10 @@ import com.example.relex20.databinding.FragmentMapsBinding
 import com.example.relex20.model.TransactionViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
@@ -68,7 +68,8 @@ class MapsFragment : Fragment(){
             mMap?.addMarker(MarkerOptions().position(sharedViewModel.destination.value!!).title("Destination"))
         }
 
-        curPosition?.let { CameraUpdateFactory.newLatLng(it) }?.let { googleMap.moveCamera(it) }
+        curPosition?.let { CameraUpdateFactory.newLatLngZoom(it, 14F) }
+            ?.let { mMap!!.animateCamera(it) }
 
 
     }
@@ -157,11 +158,25 @@ class MapsFragment : Fragment(){
 
                             //make it a mutable data, set it on xml file
                             val totalDistance: Double = SphericalUtil.computeDistanceBetween(curPosition, dest);
-                            sharedViewModel.setDistance(totalDistance)
+                            sharedViewModel.setDistance(totalDistance/1000)
                             println(sharedViewModel.distance.value)
 
                             // on below line we are adding marker to that position.
                             mMap?.addMarker(MarkerOptions().position(dest).title(location))
+
+                            val builder = LatLngBounds.Builder()
+                            curPosition?.let { builder.include(it) }
+                            builder.include(dest)
+
+                            val bounds = builder.build()
+                            val width = resources.displayMetrics.widthPixels
+                            val height = resources.displayMetrics.heightPixels
+
+
+                            val padding = width * 0.3 // offset from edges of the map in pixels
+
+                            val cu = CameraUpdateFactory.newLatLngBounds(bounds, padding.toInt())
+
 
                             val urll =
                                 curPosition?.let { getDirectionURL(it, dest, apiKey) }
@@ -178,6 +193,9 @@ class MapsFragment : Fragment(){
                             }
                             // below line is to animate camera to that position.
                             //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
+                            mapFragment?.getMapAsync {
+                                mMap?.animateCamera(cu)
+                            }
                         }
 
 
