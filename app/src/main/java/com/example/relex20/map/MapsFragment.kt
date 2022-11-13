@@ -60,8 +60,13 @@ class MapsFragment : Fragment(){
 
         //Setting the current position on the map
         curPosition = curLocation?.let { LatLng(it.latitude , curLocation.longitude) }
-        curPosition?.let { MarkerOptions().position(it).title("Marker in Sydney") }
+        curPosition?.let { MarkerOptions().position(it).title("Current Position") }
             ?.let { googleMap.addMarker(it) }
+
+        if(sharedViewModel.destination.value != null){
+            mMap?.addMarker(MarkerOptions().position(sharedViewModel.destination.value!!).title("Destination"))
+        }
+
         curPosition?.let { CameraUpdateFactory.newLatLng(it) }?.let { googleMap.moveCamera(it) }
 
 
@@ -139,6 +144,10 @@ class MapsFragment : Fragment(){
                             // on below line we are creating a variable for our location
                             // where we will add our locations latitude and longitude.
                             val dest = LatLng(address.latitude, address.longitude)
+
+
+                            //save destination to the viewmodel
+                            sharedViewModel.setDestination(dest)
 
                             // on below line we are adding marker to that position.
                             mMap?.addMarker(MarkerOptions().position(dest).title(location))

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.maps.model.LatLng
 import java.text.NumberFormat
 
 class TransactionViewModel : ViewModel() {
@@ -14,6 +15,9 @@ class TransactionViewModel : ViewModel() {
 
     private val _location = MutableLiveData<Location?>()
     val location: LiveData<Location?> = _location
+
+    private val _destination = MutableLiveData<LatLng?>()
+    val destination: LiveData<LatLng?> = _destination
 
     // tripCost for the transaction
     private val _tripCost = MutableLiveData<Double?>()
@@ -41,6 +45,15 @@ class TransactionViewModel : ViewModel() {
     fun setCurLocation(location: Location) {
 
         _location.value = location
+        //update Total
+//        updateTotal(_location.value)
+
+
+    }
+
+    fun setDestination(location: LatLng) {
+
+        _destination.value = LatLng(location.latitude, location.longitude)
         //update Total
 //        updateTotal(_location.value)
 
