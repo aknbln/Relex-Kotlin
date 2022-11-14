@@ -29,7 +29,7 @@ class TransactionViewModel : ViewModel() {
 
 
     // Total cost of the order
-    private val _total = MutableLiveData(0.0)
+    val _total = MutableLiveData(0.0)
 
     val total: LiveData<String> = Transformations.map(_total) {
         NumberFormat.getCurrencyInstance().format(it)

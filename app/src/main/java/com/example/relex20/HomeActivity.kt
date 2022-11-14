@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.relex20.map.MapsFragment
 import com.google.android.gms.maps.MapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -54,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment){
+    fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(curFragment)
         transaction.add( R.id.container, fragment)

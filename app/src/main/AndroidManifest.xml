@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/relex_logo_final"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/relex_logo_final_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Relex20"
         tools:targetApi="31">
@@ -40,7 +40,8 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyDabByM6IVwEPCwQ6Ve85pT3oI54LHkx3U"/>
+        <!--            android:value="AIzaSyDabByM6IVwEPCwQ6Ve85pT3oI54LHkx3U"-->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -58,6 +59,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+        <service
+            android:name="com.example.relex20.ForegroundOnlyLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 
 </manifest>

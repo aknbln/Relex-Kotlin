@@ -32,7 +32,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [StartTripFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-private const val TAG = "MainActivity"
+private const val TAG = "HomeActivity"
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     // Binding object instance corresponding to the fragment_start_order.xml layout
@@ -83,8 +83,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
         sharedPreferences =
             this.activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) as SharedPreferences
-
-                binding.startOrderBtn.setOnClickListener {
+            binding.startOrderBtn.setOnClickListener {
                     val enabled = sharedPreferences.getBoolean(
                         SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
                     )
@@ -94,18 +93,19 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                     } else {
                         // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
                         if (foregroundPermissionApproved()) {
-                            (activity as MainActivity?)?.loadFragment(MapsFragment())
+                            (activity as HomeActivity?)?.loadFragment(MapsFragment())
                             foregroundOnlyLocationService?.subscribeToLocationUpdates()
                                 ?: Log.d(TAG, "Service Not Bound")
-
-                        } else {
-                            requestForegroundPermissions()
                         }
+//                        } else {
+//                            requestForegroundPermissions()
+//                        }
 
                     }
                 }
         return root
     }
+
 
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
@@ -127,7 +127,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
         val serviceIntent = Intent(activity, ForegroundOnlyLocationService::class.java)
-        (activity as MainActivity?)?.bindService(serviceIntent, foregroundOnlyServiceConnection, Context.BIND_AUTO_CREATE)
+        (activity as HomeActivity?)?.bindService(serviceIntent, foregroundOnlyServiceConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onResume() {
@@ -152,7 +152,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
 
     override fun onStop() {
         if (foregroundOnlyLocationServiceBound) {
-            (activity as MainActivity?)?.unbindService(foregroundOnlyServiceConnection)
+            (activity as HomeActivity?)?.unbindService(foregroundOnlyServiceConnection)
             foregroundOnlyLocationServiceBound = false
         }
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
@@ -179,7 +179,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         if (provideRationale) {
             view?.let {
                 Snackbar.make(
-                    it.findViewById(R.id.activity_main),
+                    it.findViewById(R.id.activity_home),
                     R.string.permission_rationale,
                     Snackbar.LENGTH_LONG
                 )
@@ -225,7 +225,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
 
                     view?.let {
                         Snackbar.make(
-                            it.findViewById(R.id.activity_main),
+                            it.findViewById(R.id.activity_home),
                             R.string.permission_denied_explanation,
                             Snackbar.LENGTH_LONG
                         )
