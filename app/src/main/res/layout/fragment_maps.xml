@@ -1,8 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--add child views-->
+
+<androidx.fragment.app.FragmentContainerView xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsFragment" />
+    tools:context=".map.MapsFragment"
+    tools:layout="@layout/fragment_maps"
+    />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="15dp"
+            >
+
+            <View
+                android:id="@+id/myRectangleView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/rectangle"
+
+
+                />
+
+
+            <View
+                android:layout_alignTop="@id/myRectangleView"
+                android:id="@+id/from_circle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/oval"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/myRectangleView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignStart="@id/from_circle"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="From"
+                android:paddingStart="5dp"
+                />
+
+        </RelativeLayout>
+
+</FrameLayout>
