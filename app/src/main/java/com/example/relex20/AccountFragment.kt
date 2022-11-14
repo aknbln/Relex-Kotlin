@@ -1,16 +1,23 @@
 package com.example.relex20
 
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.fragment.app.activityViewModels
+import com.example.relex20.databinding.FragmentAccountBinding
+import com.example.relex20.databinding.FragmentMapsBinding
+import com.example.relex20.model.TransactionViewModel
+import kotlin.math.roundToInt
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,10 +31,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AccountFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var auth : FirebaseAuth
+    private val sharedViewModel: TransactionViewModel by activityViewModels()
+    private var _binding: FragmentAccountBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,21 +48,56 @@ class AccountFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        /* CODE FOR SIGN OUT BUTTON ---------
-        findViewById<Button>(R.id.signOutBtn).setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(this , MainActivity::class.java))
-        }
-        */
+
 
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false)
+    ): View?
+    {
+//        // Inflate the layout for this fragment
+//        val view = inflater.inflate(R.layout.fragment_account, container, false)
+//        return view
+        _binding = FragmentAccountBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            viewModel = sharedViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+        // SIGN OUT
+        val signOutButton : Button = view.findViewById<Button>(R.id.signOutBtn)
+        signOutButton.setOnClickListener {
+            auth.signOut()
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
+
+        // REQUEST COMPENSATION: animate here???
+        val compensationButton : Button = view.findViewById<Button>(R.id.transferBtn)
+        compensationButton.setOnClickListener {
+            var currTotal = sharedViewModel._total.value
+            // Round to two decimals
+            if (currTotal != null)
+                currTotal = (currTotal.times(100.0)).roundToInt() / 100.0
+
+            // INCLUDE FIRESTORE LOGIC HERE
+
+
+            // Show message center of screen
+            var toast : Toast = Toast.makeText(activity, "Request Submitted for $currTotal", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0, -10)
+            toast.show()
+
+
+            // Rest all variables once data sent to Firestore
+            sharedViewModel.resetOrder()
+        }
     }
 
     companion object {

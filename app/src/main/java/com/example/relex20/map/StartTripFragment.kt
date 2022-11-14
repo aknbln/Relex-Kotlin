@@ -21,6 +21,7 @@ import com.example.relex20.SharedPreferenceUtil
 import com.example.relex20.databinding.FragmentStartTripBinding
 import com.example.relex20.model.TransactionViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.example.relex20.HomeActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +33,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [StartTripFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-private const val TAG = "MainActivity"
+private const val TAG = "HomeActivity"
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     // Binding object instance corresponding to the fragment_start_order.xml layout
@@ -127,7 +128,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
         val serviceIntent = Intent(activity, ForegroundOnlyLocationService::class.java)
-        (activity as MainActivity?)?.bindService(serviceIntent, foregroundOnlyServiceConnection, Context.BIND_AUTO_CREATE)
+        (activity as HomeActivity?)?.bindService(serviceIntent, foregroundOnlyServiceConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onResume() {
@@ -152,7 +153,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
 
     override fun onStop() {
         if (foregroundOnlyLocationServiceBound) {
-            (activity as MainActivity?)?.unbindService(foregroundOnlyServiceConnection)
+            (activity as HomeActivity?)?.unbindService(foregroundOnlyServiceConnection)
             foregroundOnlyLocationServiceBound = false
         }
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
@@ -179,7 +180,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         if (provideRationale) {
             view?.let {
                 Snackbar.make(
-                    it.findViewById(R.id.activity_main),
+                    it.findViewById(R.id.activity_home),
                     R.string.permission_rationale,
                     Snackbar.LENGTH_LONG
                 )
@@ -225,7 +226,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
 
                     view?.let {
                         Snackbar.make(
-                            it.findViewById(R.id.activity_main),
+                            it.findViewById(R.id.activity_home),
                             R.string.permission_denied_explanation,
                             Snackbar.LENGTH_LONG
                         )
@@ -262,7 +263,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
             if(location != null){
                 sharedViewModel.setCurLocation(location)
                 sharedViewModel.tripStarted = true
-                (activity as MainActivity?)?.loadFragment(MapsFragment())
+                (activity as HomeActivity?)?.loadFragment(MapsFragment())
             }
 
         }

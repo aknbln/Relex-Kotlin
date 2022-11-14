@@ -72,6 +72,21 @@ class TransactionViewModel : ViewModel() {
     }
 
     /**
+     * Reset all values pertaining to the order.
+     */
+    fun resetOrder() {
+        // TODO: Reset all values associated with an order
+        _destination.value = null
+        _distance.value = 0.0
+        _scannedCosts.value= 0.0
+        _manualCosts.value= 0.0
+        _total.value = 0.0
+
+    }
+
+
+
+    /**
      * Set curLocation.
      */
     fun setDistance(distance: Double) {
