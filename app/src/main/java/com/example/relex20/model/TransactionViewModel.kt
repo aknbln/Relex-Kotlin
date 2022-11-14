@@ -5,19 +5,44 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.maps.model.LatLng
 import java.text.NumberFormat
+import java.util.*
 
 class TransactionViewModel : ViewModel() {
 
     // Default tax rate
     private val taxRate = 0.08
 
+    //for tripStart Fragment tracking
+    var tripStarted = false
+
+
     private val _location = MutableLiveData<Location?>()
     val location: LiveData<Location?> = _location
 
+    private val _destination = MutableLiveData<LatLng?>()
+    val destination: LiveData<LatLng?> = _destination
+
+
+    // distance remaining for the transaction
+    private val _distance = MutableLiveData(0.0)
+    val distance: LiveData<String> = Transformations.map(_distance) {
+        val formatter = NumberFormat.getNumberInstance()
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.format(it) + " km"
+    }
+
     // tripCost for the transaction
-    private val _tripCost = MutableLiveData<Double?>()
-    val tripCost: LiveData<Double?> = _tripCost
+    private val _tripCost = MutableLiveData(0.00)
+    val tripCost: LiveData<String> = Transformations.map(_distance) {
+
+        NumberFormat.getCurrencyInstance().format(it * taxRate)
+    }
+
+
+
 
     // scannedCosts for the transaction
     private val _scannedCosts = MutableLiveData<Double?>()
@@ -41,6 +66,28 @@ class TransactionViewModel : ViewModel() {
     fun setCurLocation(location: Location) {
 
         _location.value = location
+
+
+
+    }
+
+    /**
+     * Set curLocation.
+     */
+    fun setDistance(distance: Double) {
+
+        _distance.value = distance
+        //update Total
+        updateTotal(_distance.value!! * taxRate)
+
+
+    }
+
+
+
+    fun setDestination(location: LatLng) {
+
+        _destination.value = LatLng(location.latitude, location.longitude)
         //update Total
 //        updateTotal(_location.value)
 
@@ -52,16 +99,11 @@ class TransactionViewModel : ViewModel() {
      * Update subtotal value.
      */
     fun updateTotal(itemPrice: Double) {
-        // TODO: if _subtotal.value is not null, update it to reflect the price of the recently
-        //  added item.
-        //  Otherwise, set _subtotal.value to equal the price of the item.
         if(_total.value == null){
             _total.value = itemPrice
         }else{
             _total.value = _total.value!! + itemPrice
         }
         println("new subtotal: " + this._total.value)
-//        // TODO: calculate the tax and resulting total
-//        calculateTaxAndTotal()
     }
 }
