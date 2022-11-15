@@ -15,39 +15,39 @@
 
         <ImageView
             android:id="@+id/scannable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_width="232dp"
+            android:layout_height="261dp"
+            android:layout_marginBottom="20dp"
             android:contentDescription="receipt that will be scanned"
-            android:src="@mipmap/before_scan_foreground"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/receipt_icon"
+            app:layout_constraintBottom_toTopOf="@+id/scan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="119dp"
+            android:layout_width="108dp"
+            android:layout_height="106dp"
             android:layout_gravity="bottom"
+            android:layout_marginStart="148dp"
+            android:layout_marginBottom="72dp"
             android:baselineAlignBottom="true"
             android:src="@drawable/scan_button"
-            app:layout_constraintBottom_toBottomOf="@id/scannable"
-            app:layout_constraintEnd_toEndOf="@id/scannable"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="56dp"
             android:backgroundTint="@color/white"
             android:text="Take Picture"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/scannable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/scannable" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "604837455470",
+    "project_id": "relex-dc3d3",
+    "storage_bucket": "relex-dc3d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604837455470:android:99cf74055078365c86287f",
+        "android_client_info": {
+          "package_name": "com.example.relex20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604837455470-abaflor5u93nl4aih9n45b8mr785240o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.relex20",
+            "certificate_hash": "4e7b9294ff2b4f80d2a9497c88e0ac530aef328e"
+          }
+        },
+        {
+          "client_id": "604837455470-qust5vomotdn045ksgu77lt0oo2agcr0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA523mpJPxftXIJTPCuznIiWiIhJcL8hgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604837455470-qust5vomotdn045ksgu77lt0oo2agcr0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
