@@ -47,4 +47,10 @@
     <string name="sign_out">Sign Out</string>
     <string name="account_balance">Account Balance</string>
     <string name="todo">TODO</string>
+    <string name="input_expenses">INPUT EXPENSES</string>
+    <string name="new_expense">New Expense</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="receipt_that_will_be_scanned">receipt that will be scanned</string>
+    <string name="button_for_manually_input_expenses">button for manually input expenses</string>
+    <string name="box_logo_of_the_app">box logo of the app</string>
 </resources>

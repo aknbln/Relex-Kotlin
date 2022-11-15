@@ -18,7 +18,7 @@
             android:layout_width="232dp"
             android:layout_height="261dp"
             android:layout_marginBottom="20dp"
-            android:contentDescription="receipt that will be scanned"
+            android:contentDescription="@string/receipt_that_will_be_scanned"
             android:src="@drawable/receipt_icon"
             app:layout_constraintBottom_toTopOf="@+id/scan"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,9 @@
             android:baselineAlignBottom="true"
             android:src="@drawable/scan_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/button_for_manually_input_expenses"
+            />
 
         <Button
             android:id="@+id/camera"

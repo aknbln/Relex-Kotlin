@@ -25,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
@@ -39,6 +40,7 @@ class MapsFragment : Fragment(){
 
 
     private var mMap: GoogleMap? = null
+    private var destinationMarker: Marker? = null
     private var curPosition: LatLng? = null
     private var _binding: FragmentMapsBinding? = null
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
@@ -159,10 +161,14 @@ class MapsFragment : Fragment(){
                             //make it a mutable data, set it on xml file
                             val totalDistance: Double = SphericalUtil.computeDistanceBetween(curPosition, dest);
                             sharedViewModel.setDistance(totalDistance/1000)
-                            println(sharedViewModel.distance.value)
+
 
                             // on below line we are adding marker to that position.
-                             mMap?.addMarker(MarkerOptions().position(dest).title(location))
+                            if(destinationMarker != null) {
+                                destinationMarker!!.remove()
+                            }
+                            destinationMarker =
+                                mMap?.addMarker(MarkerOptions().position(dest).title(location))
 
                             val builder = LatLngBounds.Builder()
                             curPosition?.let { builder.include(it) }
