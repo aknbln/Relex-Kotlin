@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
@@ -7,7 +8,6 @@
             type="com.example.relex20.model.TransactionViewModel" />
     </data>
 <FrameLayout
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -52,16 +52,16 @@
             android:layout_width="49dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/account_balance"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            android:contentDescription="@string/todo" />
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="153dp"
-            android:layout_height="69dp"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins_light"
             android:text="@{viewModel.total}"
