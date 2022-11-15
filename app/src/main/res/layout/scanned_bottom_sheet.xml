@@ -14,7 +14,7 @@
         android:id="@+id/newItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "INPUT EXPENSES"
+        android:text = "@string/input_expenses"
         android:textColor = "@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -27,7 +27,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        android:hint="New Expense"
+        android:hint="@string/new_expense"
         >
 
         <EditText
@@ -35,7 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="1dp" />
+            android:layout_marginEnd="1dp"
+            android:inputType="numberDecimal"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -44,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:text="Add Expense"
+        android:text="@string/add_expense"
         android:textColor="@color/black"
         android:backgroundTint="@color/white"
         android:layout_marginBottom="30dp"
