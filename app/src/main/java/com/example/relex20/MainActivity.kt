@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.common.collect.Iterables.skip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -38,6 +39,11 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this , signInSetUp)
+
+        findViewById<Button>(R.id.skipSignInButton).setOnClickListener {
+            val intent : Intent = Intent(this , HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         findViewById<Button>(R.id.gSignInBtn).setOnClickListener {
             googleSignIn()
