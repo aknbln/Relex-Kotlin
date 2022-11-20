@@ -49,7 +49,6 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.scan -> {
-
                     //navController.navigate(R.id.action_mapsFragment_to_scanFragment2)
                     loadFragment(ScanFragment())
                     true

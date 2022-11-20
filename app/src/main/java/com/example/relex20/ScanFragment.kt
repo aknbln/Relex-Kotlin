@@ -14,9 +14,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.relex20.databinding.FragmentScanBinding
+import com.example.relex20.model.TransactionViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,9 +35,12 @@ class ScanFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentScanBinding? = null
+    private val sharedViewModel: TransactionViewModel by activityViewModels()
 
+    private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -46,19 +51,32 @@ class ScanFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentScanBinding.inflate(inflater, container, false)
-//        return inflater.inflate(R.layout.fragment_scan, container, false)
-
         val root: View = binding.root
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Connects fragment to view model
+        binding.apply {
+            viewModel = sharedViewModel //right click on viewModel to see in XML file
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        // MANUAL INPUT BOX
         binding.scan.setOnClickListener{
             //findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
             val bottomSheet = BottomSheet();
             bottomSheet.show(getParentFragmentManager(), "TAG");
         }
+
+        // CAMERA
         binding.camera.setOnClickListener{
             if (ContextCompat.checkSelfPermission(
                     requireContext(), /*Check this*/
@@ -75,9 +93,8 @@ class ScanFragment : Fragment() {
             }
             Toast.makeText(context,
                 "Clicked!", Toast.LENGTH_SHORT).show()
+            // TODO: Need to upload picture somewhere? What did Johns say about us having to save pictures
         }
-        return root
-
     }
 
     companion object {
@@ -91,7 +108,6 @@ class ScanFragment : Fragment() {
          */
         private const val CAMERA_PERMISSION_CODE = 1
         private const val CAMERA_REQUEST_CODE = 2
-
 
         // TODO: Rename and change types and number of parameters
         @JvmStatic

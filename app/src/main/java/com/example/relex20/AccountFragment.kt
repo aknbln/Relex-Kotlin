@@ -45,21 +45,13 @@ class AccountFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        auth = FirebaseAuth.getInstance()
-
-
-
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?
-    {
-//        // Inflate the layout for this fragment
-//        val view = inflater.inflate(R.layout.fragment_account, container, false)
-//        return view
+    ): View? {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -78,15 +70,13 @@ class AccountFragment : Fragment() {
             startActivity(Intent(activity, MainActivity::class.java))
         }
 
-        // REQUEST COMPENSATION: animate here???
+        // REQUEST COMPENSATION
         val compensationButton : Button = view.findViewById<Button>(R.id.transferBtn)
         compensationButton.setOnClickListener {
             var currTotal = sharedViewModel._total.value
             // Round to two decimals
             if (currTotal != null)
                 currTotal = (currTotal.times(100.0)).roundToInt() / 100.0
-
-            // INCLUDE FIRESTORE LOGIC HERE
 
 
             // Show message center of screen
@@ -95,9 +85,11 @@ class AccountFragment : Fragment() {
             toast.show()
 
 
-            // Rest all variables once data sent to Firestore
+            // TODO: Rest all variables in recyclerview
             sharedViewModel.resetOrder()
         }
+
+        // TODO: recycler view with transaction rundown
     }
 
     companion object {

@@ -68,7 +68,6 @@ class TransactionViewModel : ViewModel() {
         _location.value = location
 
 
-
     }
 
     /**
@@ -116,7 +115,7 @@ class TransactionViewModel : ViewModel() {
     fun updateTotal(itemPrice: Double) {
         if(_total.value == null){
             _total.value = itemPrice
-        }else{
+        } else {
             _total.value = _total.value!! + itemPrice
         }
         println("new subtotal: " + this._total.value)
