@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,12 +71,12 @@ class ScanFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        // INPUT BOX POP UP
+        // ----INPUT BOX POP UP----
         binding.scan.setOnClickListener{
             showBottomSheet()
         }
 
-        // CAMERA
+        // ------CAMERA------
         binding.camera.setOnClickListener{
             if (ContextCompat.checkSelfPermission(
                     requireContext(), /*Check this*/
@@ -101,7 +102,7 @@ class ScanFragment : Fragment() {
         val bottomSheet = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate( R.layout.scanned_bottom_sheet, null)
 
-        // MANUAL INPUT SUBMIT BUTTON
+        // ---MANUAL INPUT SUBMIT BUTTON-----
         val addExpenseBut: Button = view.findViewById<Button>(R.id.addExpense)
         addExpenseBut.setOnClickListener {
             val input = view.findViewById<EditText>(R.id.expenseName)
@@ -116,7 +117,9 @@ class ScanFragment : Fragment() {
                 sharedViewModel.updateTotal(expenseNum);
 
                 // notify user
-                Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, -10)
+                toast.show()
             } else {
                 Toast.makeText(context, "Empty Expense", Toast.LENGTH_SHORT).show()
             }

@@ -81,7 +81,7 @@
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             tools:itemCount="6"
-            tools:listitem="Dummy" />
+            tools:listitem="@layout/card_view_design" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signOutBtn"

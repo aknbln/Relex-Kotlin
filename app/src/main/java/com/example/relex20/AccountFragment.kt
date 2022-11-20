@@ -1,6 +1,7 @@
 package com.example.relex20
 
 import android.app.ProgressDialog.show
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -14,6 +15,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.relex20.databinding.FragmentAccountBinding
 import com.example.relex20.databinding.FragmentMapsBinding
 import com.example.relex20.model.TransactionViewModel
@@ -63,14 +66,14 @@ class AccountFragment : Fragment() {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
         }
-        // SIGN OUT
+        // -----SIGN OUT------
         val signOutButton : Button = view.findViewById<Button>(R.id.signOutBtn)
         signOutButton.setOnClickListener {
             auth.signOut()
             startActivity(Intent(activity, MainActivity::class.java))
         }
 
-        // REQUEST COMPENSATION
+        // -----REQUEST COMPENSATION-----
         val compensationButton : Button = view.findViewById<Button>(R.id.transferBtn)
         compensationButton.setOnClickListener {
             var currTotal = sharedViewModel._total.value
@@ -78,19 +81,33 @@ class AccountFragment : Fragment() {
             if (currTotal != null)
                 currTotal = (currTotal.times(100.0)).roundToInt() / 100.0
 
-
             // Show message center of screen
             var toast : Toast = Toast.makeText(activity, "Request Submitted for $currTotal", Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0, -10)
             toast.show()
 
-
-            // TODO: Rest all variables in recyclerview
+            // Reset all variables in recyclerview
             sharedViewModel.resetOrder()
-
         }
 
-        // TODO: recycler view with transaction rundown
+        // ----RECYCLER VIEW-----
+        // getting the recyclerview by its id
+        val recyclerview = binding.recyclerView
+
+        // this creates a vertical layout Manager
+        recyclerview.layoutManager = LinearLayoutManager(requireContext())
+
+        // ArrayList of class ItemsViewModel
+        val data = ArrayList<TransactionViewModel>()
+
+        // TODO: POPULATE THIS WITH TRANSACTION HISTORY. We need to have an array of TransactionView
+        // Models that we can pass into the adapter
+
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomAdapter(data)
+
+        // Setting the Adapter with the recyclerview
+        recyclerview.adapter = adapter
     }
 
     companion object {
