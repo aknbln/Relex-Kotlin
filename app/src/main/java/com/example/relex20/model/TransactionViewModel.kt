@@ -35,6 +35,9 @@ class TransactionViewModel : ViewModel() {
         formatter.format(it) + " km"
     }
 
+    private val _distance_name = MutableLiveData("")
+    val distance_name: LiveData<String> = _distance_name
+
     // tripCost for the transaction
     private val _tripCost = MutableLiveData(0.00)
     val tripCost: LiveData<String> = Transformations.map(_distance) {
@@ -72,6 +75,16 @@ class TransactionViewModel : ViewModel() {
     }
 
     /**
+     * Set curLocation.
+     */
+    fun setDestName(location: String) {
+
+        _distance_name.value = location
+
+
+    }
+
+    /**
      * Reset all values pertaining to the order.
      */
     fun resetOrder() {
@@ -92,6 +105,11 @@ class TransactionViewModel : ViewModel() {
      */
     fun setDistance(distance: Double) {
 
+
+        //if destination is changed, 1 trip per transaction
+        if(_distance.value != null){
+            updateTotal(-1 * _distance.value!! * taxRate)
+        }
         _distance.value = distance
         //update Total
         updateTotal(_distance.value!! * taxRate)

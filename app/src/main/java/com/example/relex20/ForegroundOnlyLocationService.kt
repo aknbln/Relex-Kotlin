@@ -29,6 +29,7 @@ import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -243,6 +244,7 @@ class ForegroundOnlyLocationService : Service() {
     /*
      * Generates a BIG_TEXT_STYLE Notification that represent latest location.
      */
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun generateNotification(location: Location?): Notification {
         Log.d(TAG, "generateNotification()")
 
@@ -281,7 +283,7 @@ class ForegroundOnlyLocationService : Service() {
         cancelIntent.putExtra(EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION, true)
 
         val servicePendingIntent = PendingIntent.getService(
-            this, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            this, 0, cancelIntent, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT } else {PendingIntent.FLAG_UPDATE_CURRENT  } )
 
         val activityPendingIntent = PendingIntent.getActivity(
             this, 0, launchActivityIntent, 0)

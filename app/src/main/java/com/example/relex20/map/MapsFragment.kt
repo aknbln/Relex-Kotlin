@@ -23,11 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
 import com.google.maps.android.SphericalUtil
@@ -41,6 +37,7 @@ class MapsFragment : Fragment(){
 
     private var mMap: GoogleMap? = null
     private var destinationMarker: Marker? = null
+    private var lineOptions: Polyline? = null
     private var curPosition: LatLng? = null
     private var _binding: FragmentMapsBinding? = null
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
@@ -96,7 +93,9 @@ class MapsFragment : Fragment(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-
+        if(sharedViewModel.distance_name.value != null) {
+            binding.destination.setText(sharedViewModel.distance_name.value)
+        }
         //For route https://www.geeksforgeeks.org/how-to-generate-route-between-two-locations-in-google-map-in-android/
 
         // Fetching API_KEY which we wrapped
@@ -133,6 +132,7 @@ class MapsFragment : Fragment(){
                         // checking if the entered location is null or not.
                         if (location != "") {
                             println("inside if1")
+                            sharedViewModel.setDestName(location)
                             // on below line we are creating and initializing a geo coder.
                             val geocoder = activity?.let { Geocoder(it.applicationContext) }
                             try {
@@ -165,7 +165,7 @@ class MapsFragment : Fragment(){
 
                             // on below line we are adding marker to that position.
                             if(destinationMarker != null) {
-                                destinationMarker!!.remove()
+                                    destinationMarker!!.remove()
                             }
                             destinationMarker =
                                 mMap?.addMarker(MarkerOptions().position(dest).title(location))
@@ -329,14 +329,15 @@ class MapsFragment : Fragment(){
 
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(result: List<List<LatLng>>) {
+            lineOptions?.remove()
             val lineoption = PolylineOptions()
             for (i in result.indices){
                 lineoption.addAll(result[i])
                 lineoption.width(10f)
-                lineoption.color(Color.GREEN)
+                lineoption.color(Color.MAGENTA)
                 lineoption.geodesic(true)
             }
-            mMap?.addPolyline(lineoption)
+           lineOptions = mMap?.addPolyline(lineoption)
         }
     }
 }

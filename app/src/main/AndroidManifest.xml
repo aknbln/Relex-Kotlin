@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/relex_logo_final_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Relex20"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".HomeActivity"
             android:exported="false"
@@ -44,7 +44,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDabByM6IVwEPCwQ6Ve85pT3oI54LHkx3U"/>
+            android:value="AIzaSyBX-v6RCqgfLkw7fTKTo5b8za6367ODa6k"/>
         <!--            android:value="AIzaSyDabByM6IVwEPCwQ6Ve85pT3oI54LHkx3U"-->
         <meta-data
             android:name="preloaded_fonts"
