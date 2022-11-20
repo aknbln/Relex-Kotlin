@@ -7,18 +7,19 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.relex20.databinding.FragmentScanBinding
 import com.example.relex20.model.TransactionViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,11 +70,9 @@ class ScanFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        // MANUAL INPUT BOX
+        // INPUT BOX POP UP
         binding.scan.setOnClickListener{
-            //findNavController().navigate(R.id.action_scanFragment2_to_scannedFragment2)
-            val bottomSheet = BottomSheet();
-            bottomSheet.show(getParentFragmentManager(), "TAG");
+            showBottomSheet()
         }
 
         // CAMERA
@@ -95,6 +94,37 @@ class ScanFragment : Fragment() {
                 "Clicked!", Toast.LENGTH_SHORT).show()
             // TODO: Need to upload picture somewhere? What did Johns say about us having to save pictures
         }
+    }
+
+    private fun showBottomSheet() {
+        // Set up bottomSheet and view
+        val bottomSheet = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate( R.layout.scanned_bottom_sheet, null)
+
+        // MANUAL INPUT SUBMIT BUTTON
+        val addExpenseBut: Button = view.findViewById<Button>(R.id.addExpense)
+        addExpenseBut.setOnClickListener {
+            val input = view.findViewById<EditText>(R.id.expenseName)
+
+            // If text present, we allow data to update
+            if (!TextUtils.isEmpty(input.text.toString())) {
+                val expenseString: String = input.text.toString()
+
+                // ADD TO VIEW MODEL TOTAL
+                val expenseNum = expenseString.toDouble()
+                println("ExpenseNum is $expenseNum------------")
+                sharedViewModel.updateTotal(expenseNum);
+
+                // notify user
+                Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Empty Expense", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Show bottomSheet
+        bottomSheet.setContentView(view)
+        bottomSheet.show()
     }
 
     companion object {
@@ -120,15 +150,9 @@ class ScanFragment : Fragment() {
             }
     }
 
-//    private fun loadFragment(fragment: Fragment){
-//        val transaction = supportFragmentManager.beginTransaction()
-//        transaction.remove(curFragment)
-//        transaction.add( R.id.container, fragment)
-//        curFragment = fragment
-////        transaction.replace(R.id.container, fragment)
-////        transaction.addToBackStack(null)
-//        transaction.commit()
-//    }
+    // Displays BottomSheet fragment with input box, allowing user to manually input transaction
+    // Used in onViewCreated()
+
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
      * is being removed. As a result, clear out the binding object.

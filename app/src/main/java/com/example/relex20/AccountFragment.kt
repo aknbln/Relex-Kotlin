@@ -87,6 +87,7 @@ class AccountFragment : Fragment() {
 
             // TODO: Rest all variables in recyclerview
             sharedViewModel.resetOrder()
+
         }
 
         // TODO: recycler view with transaction rundown

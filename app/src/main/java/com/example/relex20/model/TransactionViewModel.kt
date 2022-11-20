@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import java.text.NumberFormat
 import java.util.*
+import kotlin.reflect.typeOf
 
 class TransactionViewModel : ViewModel() {
 
@@ -75,6 +76,7 @@ class TransactionViewModel : ViewModel() {
      */
     fun resetOrder() {
         // TODO: Reset all values associated with an order
+        println("GETS TO RESET")
         _destination.value = null
         _distance.value = 0.0
         _scannedCosts.value= 0.0
@@ -117,7 +119,10 @@ class TransactionViewModel : ViewModel() {
             _total.value = itemPrice
         } else {
             _total.value = _total.value!! + itemPrice
+            total
+
         }
+        println("Double is: $itemPrice with type")
         println("new subtotal: " + this._total.value)
     }
 }

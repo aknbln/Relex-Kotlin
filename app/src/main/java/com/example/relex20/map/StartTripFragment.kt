@@ -1,6 +1,7 @@
 package com.example.relex20.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
@@ -73,6 +74,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -84,7 +86,6 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
         sharedPreferences =
             this.activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) as SharedPreferences
-
                 binding.startOrderBtn.setOnClickListener {
                     val enabled = sharedPreferences.getBoolean(
                         SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
