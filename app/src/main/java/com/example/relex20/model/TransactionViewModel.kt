@@ -91,6 +91,7 @@ class TransactionViewModel : ViewModel() {
         // TODO: Reset all values associated with an order
         println("GETS TO RESET")
         _destination.value = null
+        _distance_name.value = null
         _distance.value = 0.0
         _scannedCosts.value= 0.0
         _manualCosts.value= 0.0

@@ -87,24 +87,24 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         sharedPreferences =
             this.activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) as SharedPreferences
                 binding.startOrderBtn.setOnClickListener {
-                    val enabled = sharedPreferences.getBoolean(
-                        SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
-                    )
+//                    val enabled = sharedPreferences.getBoolean(
+//                        SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false
+//                    )
 
-                    if (enabled) {
-                        foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
+//                    if (enabled) {
+//                        foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
+//                    } else {
+                    // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
+                    if (foregroundPermissionApproved()) {
+
+                        foregroundOnlyLocationService?.subscribeToLocationUpdates()
+                            ?: Log.d(TAG, "Service Not Bound")
+
                     } else {
-                        // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
-                        if (foregroundPermissionApproved()) {
-
-                            foregroundOnlyLocationService?.subscribeToLocationUpdates()
-                                ?: Log.d(TAG, "Service Not Bound")
-
-                        } else {
-                            requestForegroundPermissions()
-                        }
-
+                        requestForegroundPermissions()
                     }
+
+                //}
                 }
         return root
     }
