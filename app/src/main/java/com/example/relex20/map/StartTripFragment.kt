@@ -1,6 +1,7 @@
 package com.example.relex20.map
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
@@ -100,8 +101,8 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                         foregroundOnlyLocationService?.subscribeToLocationUpdates()
                             ?: Log.d(TAG, "Service Not Bound")
 
-                        binding.progressBar.visibility = View.VISIBLE
-                        binding.startOrderBtn.visibility = View.INVISIBLE
+                        fader()
+
 
                     } else {
                         requestForegroundPermissions()
@@ -110,6 +111,14 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                 //}
                 }
         return root
+    }
+
+    private fun fader() {
+        val animator = ObjectAnimator.ofFloat(binding.startOrderBtn, View.ALPHA, 0f)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.start()
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     /**
