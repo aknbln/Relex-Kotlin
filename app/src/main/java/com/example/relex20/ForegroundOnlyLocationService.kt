@@ -110,6 +110,7 @@ class ForegroundOnlyLocationService : Service() {
 
         // TODO: Step 1.4, Initialize the LocationCallback.
         locationCallback = object : LocationCallback() {
+            @RequiresApi(Build.VERSION_CODES.S)
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
 
@@ -173,6 +174,7 @@ class ForegroundOnlyLocationService : Service() {
         super.onRebind(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onUnbind(intent: Intent): Boolean {
         Log.d(TAG, "onUnbind()")
 
@@ -283,10 +285,10 @@ class ForegroundOnlyLocationService : Service() {
         cancelIntent.putExtra(EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION, true)
 
         val servicePendingIntent = PendingIntent.getService(
-            this, 0, cancelIntent, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT } else {PendingIntent.FLAG_UPDATE_CURRENT  } )
+            this, 0, cancelIntent,PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT )
 
         val activityPendingIntent = PendingIntent.getActivity(
-            this, 0, launchActivityIntent, 0)
+            this, 0, launchActivityIntent, PendingIntent.FLAG_MUTABLE )
 
         // 4. Build and issue the notification.
         // Notification Channel Id is ignored for Android pre O (26).
