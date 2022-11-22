@@ -100,6 +100,9 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                         foregroundOnlyLocationService?.subscribeToLocationUpdates()
                             ?: Log.d(TAG, "Service Not Bound")
 
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.startOrderBtn.visibility = View.INVISIBLE
+
                     } else {
                         requestForegroundPermissions()
                     }
@@ -264,6 +267,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
             if(location != null){
                 sharedViewModel.setCurLocation(location)
                 sharedViewModel.tripStarted = true
+                binding.progressBar.visibility = View.INVISIBLE
                 (activity as HomeActivity?)?.loadFragment(MapsFragment())
             }
 
