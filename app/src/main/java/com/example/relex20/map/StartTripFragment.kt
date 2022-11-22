@@ -115,8 +115,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
 
     private fun fader() {
         val animator = ObjectAnimator.ofFloat(binding.startOrderBtn, View.ALPHA, 0f)
-        animator.repeatCount = 1
-        animator.repeatMode = ObjectAnimator.REVERSE
+
         animator.start()
         binding.progressBar.visibility = View.VISIBLE
     }
