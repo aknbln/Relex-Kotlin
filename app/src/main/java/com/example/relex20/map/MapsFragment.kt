@@ -1,6 +1,8 @@
 package com.example.relex20.map
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -140,67 +142,106 @@ class MapsFragment : Fragment(){
                                 // on below line we are getting location from the
                                 // location name and adding that location to address list.
                                 if (geocoder != null) {
-                                    println("inside if2")
                                     addressList = geocoder.getFromLocationName(location, 1)
+                                    println(addressList)
+
+                                    // on below line we are getting the location
+                                    // from our list a first position.
+                                    if (addressList != null) {
+                                        if(!addressList.isEmpty()) {
+                                            val address = addressList[0]
+
+                                            // on below line we are creating a variable for our location
+                                            // where we will add our locations latitude and longitude.
+                                            val dest = LatLng(address.latitude, address.longitude)
+
+
+                                            //save destination to the viewmodel
+                                            sharedViewModel.setDestination(dest)
+
+                                            //make it a mutable data, set it on xml file
+                                            val totalDistance: Double =
+                                                SphericalUtil.computeDistanceBetween(curPosition, dest);
+                                            sharedViewModel.setDistance(totalDistance / 1000)
+
+
+                                            // on below line we are adding marker to that position.
+                                            if (destinationMarker != null) {
+                                                destinationMarker!!.remove()
+                                            }
+                                            destinationMarker =
+                                                mMap?.addMarker(
+                                                    MarkerOptions().position(dest).title(location)
+                                                )
+
+                                            val builder = LatLngBounds.Builder()
+                                            curPosition?.let { builder.include(it) }
+                                            builder.include(dest)
+
+                                            val bounds = builder.build()
+                                            val width = resources.displayMetrics.widthPixels
+
+
+                                            val padding =
+                                                width * 0.3 // offset from edges of the map in pixels
+
+                                            val cu = CameraUpdateFactory.newLatLngBounds(
+                                                bounds,
+                                                padding.toInt()
+                                            )
+
+
+                                            val urll =
+                                                curPosition?.let { getDirectionURL(it, dest, apiKey) }
+
+                                            println("Is url null?:  " + urll)
+                                            if (urll != null) {
+                                                mapFragment?.getMapAsync {
+                                                    GetDirection(urll).execute()
+                                                    curPosition?.let { it1 ->
+                                                        CameraUpdateFactory.newLatLngZoom(
+                                                            it1, 14F
+                                                        )
+                                                    }?.let { it2 -> mMap?.animateCamera(it2) }
+                                                }
+                                            }
+                                            // below line is to animate camera to that position.
+                                            //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
+                                            mapFragment?.getMapAsync {
+                                                mMap?.animateCamera(cu)
+                                            }
+                                        }else{
+
+                                            // build alert dialog
+                                            val dialogBuilder = AlertDialog.Builder(context)
+
+                                            // set message of alert dialog
+                                            dialogBuilder.setMessage("Please enter a specific address (ex: Austin, Target 78705")
+                                                // if the dialog is cancelable
+                                                .setCancelable(true)
+                                            // positive button text and action
+                                //                                        .setPositiveButton("Proceed", DialogInterface.OnClickListener {
+                                //                                                dialog, id -> finish()
+                                //                                        })
+                                //                                        // negative button text and action
+                                                                        .setNegativeButton("Okay", DialogInterface.OnClickListener {
+                                                                                dialog, id -> dialog.cancel()
+                                                                        })
+
+                                            // create dialog box
+                                            val alert = dialogBuilder.create()
+                                            // set title for alert dialog box
+                                            alert.setTitle("AlertDialogExample")
+                                            // show alert dialog
+                                            alert.show()
+
+                                        }
+                                    }
                                 }
                             } catch (e: IOException) {
                                 e.printStackTrace()
                             }
-                            // on below line we are getting the location
-                            // from our list a first position.
-                            val address = addressList!![0]
 
-                            // on below line we are creating a variable for our location
-                            // where we will add our locations latitude and longitude.
-                            val dest = LatLng(address.latitude, address.longitude)
-
-
-                            //save destination to the viewmodel
-                            sharedViewModel.setDestination(dest)
-
-                            //make it a mutable data, set it on xml file
-                            val totalDistance: Double = SphericalUtil.computeDistanceBetween(curPosition, dest);
-                            sharedViewModel.setDistance(totalDistance/1000)
-
-
-                            // on below line we are adding marker to that position.
-                            if(destinationMarker != null) {
-                                    destinationMarker!!.remove()
-                            }
-                            destinationMarker =
-                                mMap?.addMarker(MarkerOptions().position(dest).title(location))
-
-                            val builder = LatLngBounds.Builder()
-                            curPosition?.let { builder.include(it) }
-                            builder.include(dest)
-
-                            val bounds = builder.build()
-                            val width = resources.displayMetrics.widthPixels
-
-
-                            val padding = width * 0.3 // offset from edges of the map in pixels
-
-                            val cu = CameraUpdateFactory.newLatLngBounds(bounds, padding.toInt())
-
-
-                            val urll =
-                                curPosition?.let { getDirectionURL(it, dest, apiKey) }
-
-                            println("Is url null?:  " + urll)
-                            if (urll != null) {
-                                mapFragment?.getMapAsync {
-                                    GetDirection(urll).execute()
-                                    curPosition?.let { it1 ->
-                                        CameraUpdateFactory.newLatLngZoom(
-                                            it1, 14F)
-                                    }?.let { it2 -> mMap?.animateCamera(it2) }
-                                }
-                            }
-                            // below line is to animate camera to that position.
-                            //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
-                            mapFragment?.getMapAsync {
-                                mMap?.animateCamera(cu)
-                            }
                         }
 
 
