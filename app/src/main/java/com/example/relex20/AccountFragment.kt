@@ -90,24 +90,6 @@ class AccountFragment : Fragment() {
             sharedViewModel.resetOrder()
         }
 
-        // ----RECYCLER VIEW-----
-        // getting the recyclerview by its id
-        val recyclerview = binding.recyclerView
-
-        // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(requireContext())
-
-        // ArrayList of class ItemsViewModel
-        val data = ArrayList<TransactionViewModel>()
-
-        // TODO: POPULATE THIS WITH TRANSACTION HISTORY. We need to have an array of TransactionView
-        // Models that we can pass into the adapter
-
-        // This will pass the ArrayList to our Adapter
-        val adapter = CustomAdapter(data)
-
-        // Setting the Adapter with the recyclerview
-        recyclerview.adapter = adapter
     }
 
     companion object {
