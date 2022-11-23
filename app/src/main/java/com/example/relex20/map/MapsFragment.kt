@@ -231,7 +231,7 @@ class MapsFragment : Fragment(){
                                             // create dialog box
                                             val alert = dialogBuilder.create()
                                             // set title for alert dialog box
-                                            alert.setTitle("AlertDialogExample")
+                                            alert.setTitle("Address not Found!")
                                             // show alert dialog
                                             alert.show()
 
