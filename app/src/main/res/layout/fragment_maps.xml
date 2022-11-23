@@ -26,6 +26,8 @@
             >
 
 
+
+
             <View
                 android:id="@+id/myRectangleView"
                 android:layout_width="match_parent"

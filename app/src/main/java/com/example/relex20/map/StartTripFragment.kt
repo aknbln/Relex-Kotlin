@@ -1,6 +1,7 @@
 package com.example.relex20.map
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
@@ -100,6 +101,9 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                         foregroundOnlyLocationService?.subscribeToLocationUpdates()
                             ?: Log.d(TAG, "Service Not Bound")
 
+                        fader()
+
+
                     } else {
                         requestForegroundPermissions()
                     }
@@ -107,6 +111,13 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
                 //}
                 }
         return root
+    }
+
+    private fun fader() {
+        val animator = ObjectAnimator.ofFloat(binding.startOrderBtn, View.ALPHA, 0f)
+
+        animator.start()
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     /**
@@ -264,6 +275,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
             if(location != null){
                 sharedViewModel.setCurLocation(location)
                 sharedViewModel.tripStarted = true
+                binding.progressBar.visibility = View.INVISIBLE
                 (activity as HomeActivity?)?.loadFragment(MapsFragment())
             }
 
