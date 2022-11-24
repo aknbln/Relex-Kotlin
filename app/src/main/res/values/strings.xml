@@ -54,7 +54,7 @@
     <string name="button_for_manually_input_expenses">button for manually input expenses</string>
     <string name="box_logo_of_the_app">box logo of the app</string>
     <string name="sign_in">Sign In</string>
-    <string name="skip">SKIP</string>
+    <string name="skip">DON\'T SIGN IN</string>
     <string name="maps">Maps</string>
     <string name="scan">Scan</string>
     <string name="account">Account</string>
