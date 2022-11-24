@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="160dp"
         android:text="Sign In"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="164dp"
-        android:text="SKIP"
+        android:layout_marginBottom="92dp"
+        android:text="DON'T SIGN IN"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:backgroundTint="@color/white"

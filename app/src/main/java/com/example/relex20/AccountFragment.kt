@@ -2,6 +2,7 @@ package com.example.relex20
 
 import android.app.ProgressDialog.show
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -81,13 +83,36 @@ class AccountFragment : Fragment() {
             if (currTotal != null)
                 currTotal = (currTotal.times(100.0)).roundToInt() / 100.0
 
+            // build alert dialog
+            val dialogBuilder = AlertDialog.Builder(requireContext())
+
+            // set message of alert dialog
+            dialogBuilder.setMessage("Confirm request for $currTotal?")
+                // if the dialog is cancelable
+                .setCancelable(false)
+                // positive button text and action
+                .setPositiveButton("Confirm", DialogInterface.OnClickListener {
+                    // Reset all variables in recyclerview
+                    _, _ -> sharedViewModel.resetOrder()
+                })
+                // negative button text and action
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                        dialog, _ -> dialog.cancel()
+                })
+
+            // create dialog box
+            val alert = dialogBuilder.create()
+            // set title for alert dialog box
+            alert.setTitle("Alert")
+            // show alert dialog
+            alert.show()
+
             // Show message center of screen
             var toast : Toast = Toast.makeText(activity, "Request Submitted for $currTotal", Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0, -10)
             toast.show()
 
-            // Reset all variables in recyclerview
-            sharedViewModel.resetOrder()
+
         }
 
     }
