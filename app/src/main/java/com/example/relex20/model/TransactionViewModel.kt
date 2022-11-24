@@ -48,13 +48,15 @@ class TransactionViewModel : ViewModel() {
 
 
 
-    // scannedCosts for the transaction
-    private val _scannedCosts = MutableLiveData<Double?>()
-    val scannedCosts: LiveData<Double?> = _scannedCosts
+    private val _tripCosts = MutableLiveData(0.0)
+    val tripCosts: LiveData<String> = Transformations.map(_tripCosts) {
+        NumberFormat.getCurrencyInstance().format(it)
+    }
 
-    // manualCosts for the transaction
-    private val _manualCosts = MutableLiveData<Double?>()
-    val manualCosts: LiveData<Double?> = _manualCosts
+    private val _receiptCosts = MutableLiveData(0.0)
+    val receiptCosts: LiveData<String> = Transformations.map(_receiptCosts) {
+        NumberFormat.getCurrencyInstance().format(it)
+    }
 
 
     // Total cost of the order
@@ -93,8 +95,8 @@ class TransactionViewModel : ViewModel() {
         _destination.value = null
         _distance_name.value = null
         _distance.value = 0.0
-        _scannedCosts.value= 0.0
-        _manualCosts.value= 0.0
+        _tripCosts.value= 0.0
+        _receiptCosts.value= 0.0
         _total.value = 0.0
 
     }
@@ -144,4 +146,28 @@ class TransactionViewModel : ViewModel() {
         println("Double is: $itemPrice with type")
         println("new subtotal: " + this._total.value)
     }
+
+    fun updateReceiptCosts(itemPrice: Double) {
+        if(receiptCosts.value == null){
+            _receiptCosts.value = itemPrice
+        } else {
+            _receiptCosts.value = _receiptCosts.value!! + itemPrice
+            receiptCosts
+        }
+        println("_receiptCosts is: $itemPrice with type")
+        println("new subtotal: " + this._receiptCosts.value)
+    }
+
+    fun updateTripCosts(itemPrice: Double) {
+        if(_total.value == null){
+            _tripCosts.value = itemPrice
+        } else {
+            _tripCosts.value = _tripCosts.value!! + itemPrice
+            _tripCosts
+
+        }
+        println("Double is: $itemPrice with type")
+        println("new subtotal: " + this._total.value)
+    }
+
 }
