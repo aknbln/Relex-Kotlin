@@ -1,0 +1,52 @@
+
+<resources>
+    <string name="app_name">Relex</string>
+<string name="location_updated">Guncel Lokasyon: %1$s</string>
+<string name="title_activity_home">HomeActivity</string>
+<string name="preference_file_key">com.example.android.while_in_use_location.PREFERENCE_FILE_KEY</string>
+<string name="no_location_text">Kendi lokasyonun yok!</string>
+<string name="trip_cost">Tutar:</string>
+<string name="destination">Istikamet</string>
+<string name="current_location">Suanki lokasyonun</string>
+<string name="_0_00">0.00$</string>
+<string name="distance_remaining">Toplam Mesafe:</string>
+<string name="start_trip">Yolculuga Basla!</string>
+<string name="title_activity_login">LoginActivity</string>
+
+<string name="prompt_email">Email</string>
+<string name="prompt_password">Sifre</string>
+<string name="action_sign_in">Oturum ac veya kayit ol</string>
+<string name="action_sign_in_short">Oturum ac</string>
+<string name="welcome">"Hosgeldin !"</string>
+<string name="invalid_username">username gecersiz!</string>
+<string name="invalid_password">Sifre en az 5 karakter olmali</string>
+<string name="login_failed">"Oturum acilamadi"</string>
+
+<string name="first_fragment_label">First Fragment</string>
+<string name="second_fragment_label">Second Fragment</string>
+<string name="next">Bir Sonraki</string>
+<string name="previous">Onceki</string>
+
+<string name="hello_first_fragment">Hello first fragment</string>
+<string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+<string name="request_compensations">Tutari iste</string>
+<string name="sign_out">Oturumu kapat</string>
+<string name="account_balance">Hesap Tutari</string>
+<string name="todo">TODO</string>
+<string name="input_expenses">Tutarlari gir</string>
+<string name="new_expense">Yeni Tutar</string>
+<string name="add_expense">Tutari Ekle</string>
+<string name="receipt_that_will_be_scanned">Fotografi cekilecek fis</string>
+<string name="button_for_manually_input_expenses">Manuel tutar eklemek icin buton</string>
+<string name="box_logo_of_the_app">uygulumanin kutu logosu</string>
+    <string name="sign_in">Oturum ac</string>
+    <string name="skip">ATLA</string>
+    <string name="maps">Harita</string>
+    <string name="scan">Tara</string>
+    <string name="account">Hesap</string>
+    <string name="input_manually">Manuel tutar ekle</string>
+    <string name="take_picture">Fis Fotografi Cek</string>
+    <string name="address_notfound">Adres Bulunamadi!</string>
+    <string name="enter_specific_adress">Spesifik bir adres girin lutfen! (ex: Austin, Target 78705</string>
+    <string name="okay">Tamam</string>
+    </resources>
