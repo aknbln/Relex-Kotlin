@@ -107,12 +107,6 @@ class AccountFragment : Fragment() {
             // show alert dialog
             alert.show()
 
-            // Show message center of screen
-            var toast : Toast = Toast.makeText(activity, "Request Submitted for $currTotal", Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.CENTER, 0, -10)
-            toast.show()
-
-
         }
 
     }
