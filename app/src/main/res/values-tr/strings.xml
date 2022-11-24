@@ -49,4 +49,6 @@
     <string name="address_notfound">Adres Bulunamadi!</string>
     <string name="enter_specific_adress">Spesifik bir adres girin lutfen! (ex: Austin, Target 78705</string>
     <string name="okay">Tamam</string>
+    <string name="trip_cost1">Yolculuk tutari:</string>
+    <string name="receipts">Fis Tutari:</string>
     </resources>

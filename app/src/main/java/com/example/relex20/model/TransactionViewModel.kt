@@ -116,7 +116,7 @@ class TransactionViewModel : ViewModel() {
         _distance.value = distance
         //update Total
         updateTotal(_distance.value!! * taxRate)
-
+        updateTripCosts(_distance.value!! * taxRate)
 
     }
 
@@ -140,7 +140,6 @@ class TransactionViewModel : ViewModel() {
             _total.value = itemPrice
         } else {
             _total.value = _total.value!! + itemPrice
-            total
 
         }
         println("Double is: $itemPrice with type")
@@ -152,9 +151,9 @@ class TransactionViewModel : ViewModel() {
             _receiptCosts.value = itemPrice
         } else {
             _receiptCosts.value = _receiptCosts.value!! + itemPrice
-            receiptCosts
         }
         println("_receiptCosts is: $itemPrice with type")
+        updateTotal(itemPrice)
         println("new subtotal: " + this._receiptCosts.value)
     }
 
@@ -163,7 +162,6 @@ class TransactionViewModel : ViewModel() {
             _tripCosts.value = itemPrice
         } else {
             _tripCosts.value = _tripCosts.value!! + itemPrice
-            _tripCosts
 
         }
         println("Double is: $itemPrice with type")

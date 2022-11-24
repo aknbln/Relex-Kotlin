@@ -114,7 +114,6 @@ class ScanFragment : Fragment() {
                 // ADD TO VIEW MODEL TOTAL
                 val expenseNum = expenseString.toDouble()
                 println("ExpenseNum is $expenseNum------------")
-                sharedViewModel.updateTotal(expenseNum)
                 sharedViewModel.updateReceiptCosts(expenseNum)
 
                 // notify user

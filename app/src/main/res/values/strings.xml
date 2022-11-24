@@ -63,5 +63,7 @@
     <string name="address_notfound">Address not Found!</string>
     <string name="enter_specific_adress">Please enter a specific address (ex: Austin, Target 78705</string>
     <string name="okay">Okay</string>
+    <string name="trip_cost1">Trip Cost:</string>
+    <string name="receipts">Receipts</string>
 
 </resources>
