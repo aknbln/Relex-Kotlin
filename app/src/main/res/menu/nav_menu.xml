@@ -3,13 +3,13 @@
     <item
         android:id="@+id/maps"
         android:icon="@drawable/maps"
-        android:title="Maps"  />
+        android:title="@string/maps"  />
     <item
         android:id="@+id/scan"
         android:icon="@drawable/scan"
-        android:title="Scan" />
+        android:title="@string/scan" />
     <item
         android:id="@+id/account"
         android:icon="@drawable/account"
-        android:title="Account" />
+        android:title="@string/account" />
 </menu>

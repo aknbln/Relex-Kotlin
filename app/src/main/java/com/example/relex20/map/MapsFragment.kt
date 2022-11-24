@@ -216,7 +216,7 @@ class MapsFragment : Fragment(){
                                             val dialogBuilder = AlertDialog.Builder(context)
 
                                             // set message of alert dialog
-                                            dialogBuilder.setMessage("Please enter a specific address (ex: Austin, Target 78705")
+                                            dialogBuilder.setMessage(R.string.enter_specific_adress)
                                                 // if the dialog is cancelable
                                                 .setCancelable(true)
                                             // positive button text and action
@@ -224,14 +224,14 @@ class MapsFragment : Fragment(){
                                 //                                                dialog, id -> finish()
                                 //                                        })
                                 //                                        // negative button text and action
-                                                                        .setNegativeButton("Okay", DialogInterface.OnClickListener {
+                                                                        .setNegativeButton(R.string.okay, DialogInterface.OnClickListener {
                                                                                 dialog, id -> dialog.cancel()
                                                                         })
 
                                             // create dialog box
                                             val alert = dialogBuilder.create()
                                             // set title for alert dialog box
-                                            alert.setTitle("Address not Found!")
+                                            alert.setTitle(R.string.address_notfound)
                                             // show alert dialog
                                             alert.show()
 

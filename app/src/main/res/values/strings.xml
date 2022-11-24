@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">Relex2.0</string>
+    <string name="app_name">Relex</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="launch_activity">Launch activity</string>
-    <string name="location_unknown">Location Unknown</string>
-    <string name="location_updates_label">Location Updates</string>
+    <string name="launch_activity" translatable="false">Launch activity</string>
+    <string name="location_unknown" translatable="false">Location Unknown</string>
+    <string name="location_updates_label" translatable="false">Location Updates</string>
 
-    <string name="permission_rationale">Location permission needed for core functionality</string>
-    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
-    <string name="settings">Settings</string>
-    <string name="ok">OK</string>
+    <string name="permission_rationale" translatable="false">Location permission needed for core functionality</string>
+    <string name="permission_denied_explanation" translatable="false">Permission was denied, but is needed for core functionality.</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="ok" translatable="false">OK</string>
 
-    <string name="start_location_updates_button_text">Start receiving location updates</string>
-    <string name="stop_location_updates_button_text">Stop receiving location updates</string>
+    <string name="start_location_updates_button_text" translatable="false">Start receiving location updates</string>
+    <string name="stop_location_updates_button_text" translatable="false">Stop receiving location updates</string>
 
     <string name="location_updated">Location Updated: %1$s</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -53,6 +53,15 @@
     <string name="receipt_that_will_be_scanned">receipt that will be scanned</string>
     <string name="button_for_manually_input_expenses">button for manually input expenses</string>
     <string name="box_logo_of_the_app">box logo of the app</string>
-    <string name="take_picture">Take Picture</string>
+    <string name="sign_in">Sign In</string>
+    <string name="skip">SKIP</string>
+    <string name="maps">Maps</string>
+    <string name="scan">Scan</string>
+    <string name="account">Account</string>
     <string name="input_manually">Input Manually</string>
+    <string name="take_picture">Take Picture of the Receipt</string>
+    <string name="address_notfound">Address not Found!</string>
+    <string name="enter_specific_adress">Please enter a specific address (ex: Austin, Target 78705</string>
+    <string name="okay">Okay</string>
+
 </resources>
