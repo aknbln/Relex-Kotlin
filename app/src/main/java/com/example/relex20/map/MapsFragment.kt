@@ -2,14 +2,17 @@ package com.example.relex20.map
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +83,7 @@ class MapsFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setRetainInstance(true)
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -183,13 +187,20 @@ class MapsFragment : Fragment(){
 
 
                                             val padding =
-                                                width * 0.3 // offset from edges of the map in pixels
+                                                width * 0.1 // offset from edges of the map in pixels
+                                            val height = resources.displayMetrics.heightPixels
 
-                                            val cu = CameraUpdateFactory.newLatLngBounds(
+                                            var cu = CameraUpdateFactory.newLatLngBounds(
                                                 bounds,
+                                                width,
+                                                height,
                                                 padding.toInt()
                                             )
 
+
+//                                            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//                                                cu = CameraUpdateFactory.newLatLngBounds(bounds, dpAPixeles(padding, requireContext()));
+//                                            }
 
                                             val urll =
                                                 curPosition?.let { getDirectionURL(it, dest, apiKey) }
@@ -380,5 +391,12 @@ class MapsFragment : Fragment(){
             }
            lineOptions = mMap?.addPolyline(lineoption)
         }
+    }
+
+    fun dpAPixeles(dp: Double, contexto: Context): Int {
+        val r: Resources = contexto.getResources()
+        return TypedValue
+            .applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), r.getDisplayMetrics())
+            .toInt()
     }
 }

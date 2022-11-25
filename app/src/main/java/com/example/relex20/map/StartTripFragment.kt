@@ -81,6 +81,7 @@ class StartTripFragment : Fragment(), SharedPreferences.OnSharedPreferenceChange
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setRetainInstance(true)
         _binding = FragmentStartTripBinding.inflate(inflater, container, false)
         val root: View = binding.root
         // Navigate to entree menu
