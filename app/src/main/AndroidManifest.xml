@@ -21,7 +21,7 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Relex20.NoActionBar">
             <meta-data

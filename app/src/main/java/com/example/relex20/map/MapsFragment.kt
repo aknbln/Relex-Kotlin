@@ -83,7 +83,6 @@ class MapsFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setRetainInstance(true)
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
