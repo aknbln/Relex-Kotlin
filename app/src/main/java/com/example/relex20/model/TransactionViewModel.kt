@@ -1,5 +1,6 @@
 package com.example.relex20.model
 
+import android.graphics.Bitmap
 import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -155,6 +156,9 @@ class TransactionViewModel : ViewModel() {
         println("_receiptCosts is: $itemPrice with type")
         updateTotal(itemPrice)
         println("new subtotal: " + this._receiptCosts.value)
+    }
+    fun updateReceiptImage(image: Bitmap) {
+        println("Updated image to: " + image);
     }
 
     fun updateTripCosts(itemPrice: Double) {

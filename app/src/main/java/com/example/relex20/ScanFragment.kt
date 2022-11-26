@@ -199,14 +199,17 @@ class ScanFragment : Fragment() {
                 val thumbNail: Bitmap = data!!.extras!!.get("data") as Bitmap
                 binding.scannable.setImageBitmap(thumbNail);
                 pictureSet = true
+                sharedViewModel.updateReceiptImage(thumbNail);
             }
             else {
                 binding.scannable.setImageResource(R.drawable.receipt_icon);
                 pictureSet = false
+                sharedViewModel.updateReceiptImage(Bitmap.createBitmap(0, 0, Bitmap.Config.ARGB_8888));
             }
         }
         else {
             binding.scannable.setImageResource(R.drawable.receipt_icon);
+            sharedViewModel.updateReceiptImage(Bitmap.createBitmap(0, 0, Bitmap.Config.ARGB_8888));
             pictureSet = false
         }
     }
