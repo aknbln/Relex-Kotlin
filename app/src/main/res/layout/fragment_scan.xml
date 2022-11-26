@@ -13,8 +13,6 @@
     tools:context=".ScanFragment">
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
@@ -25,40 +23,38 @@
             android:id="@+id/scannable"
             android:layout_width="232dp"
             android:layout_height="261dp"
-            android:layout_marginBottom="24dp"
             android:contentDescription="@string/receipt_that_will_be_scanned"
             android:src="@drawable/receipt_icon"
-            app:layout_constraintBottom_toTopOf="@+id/scan"
+            app:layout_constraintBottom_toTopOf="@+id/camera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.828" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/scan"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="44dp"
             android:backgroundTint="@color/black"
             android:text="@string/input_manually"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/camera"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/black"
             android:text="@string/take_picture"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/scan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

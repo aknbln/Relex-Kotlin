@@ -42,6 +42,7 @@ class ScanFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
 
+    private var pictureSet: Boolean  = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +92,8 @@ class ScanFragment : Fragment() {
                     CAMERA_PERMISSION_CODE
                 )
             }
-            Toast.makeText(context,
-                "Clicked!", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context,
+            //    "Clicked!", Toast.LENGTH_SHORT).show()
             // TODO: Need to upload picture somewhere? What did Johns say about us having to save pictures
         }
     }
@@ -107,22 +108,29 @@ class ScanFragment : Fragment() {
         addExpenseBut.setOnClickListener {
             val input = view.findViewById<EditText>(R.id.expenseName)
 
-            // If text present, we allow data to update
-            if (!TextUtils.isEmpty(input.text.toString())) {
-                val expenseString: String = input.text.toString()
+            if (pictureSet) {
 
-                // ADD TO VIEW MODEL TOTAL
-                val expenseNum = expenseString.toDouble()
-                println("ExpenseNum is $expenseNum------------")
-                sharedViewModel.updateReceiptCosts(expenseNum)
+                // If text present, we allow data to update
+                if (!TextUtils.isEmpty(input.text.toString())) {
+                    val expenseString: String = input.text.toString()
 
-                // notify user
-                val toast = Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, -10)
-                toast.show()
-            } else {
-                Toast.makeText(context, "Empty Expense", Toast.LENGTH_SHORT).show()
+                    // ADD TO VIEW MODEL TOTAL
+                    val expenseNum = expenseString.toDouble()
+                    println("ExpenseNum is $expenseNum------------")
+                    sharedViewModel.updateReceiptCosts(expenseNum)
+
+                    // notify user
+                    val toast = Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, -10)
+                    toast.show()
+                } else {
+                    Toast.makeText(context, "Empty Expense", Toast.LENGTH_SHORT).show()
+                }
             }
+            else {
+                Toast.makeText(context, "Must take picture before adding expense", Toast.LENGTH_SHORT).show()
+            }
+            input.text.clear()
         }
 
         // Show bottomSheet
@@ -190,7 +198,16 @@ class ScanFragment : Fragment() {
                 // paste image here
                 val thumbNail: Bitmap = data!!.extras!!.get("data") as Bitmap
                 binding.scannable.setImageBitmap(thumbNail);
+                pictureSet = true
             }
+            else {
+                binding.scannable.setImageResource(R.drawable.receipt_icon);
+                pictureSet = false
+            }
+        }
+        else {
+            binding.scannable.setImageResource(R.drawable.receipt_icon);
+            pictureSet = false
         }
     }
 }
