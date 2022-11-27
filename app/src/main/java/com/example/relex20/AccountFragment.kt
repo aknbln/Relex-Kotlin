@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.relex20.databinding.FragmentAccountBinding
 import com.example.relex20.databinding.FragmentMapsBinding
 import com.example.relex20.model.TransactionViewModel
+import java.text.NumberFormat
 import kotlin.math.roundToInt
 
 
@@ -87,16 +88,16 @@ class AccountFragment : Fragment() {
             val dialogBuilder = AlertDialog.Builder(requireContext())
 
             // set message of alert dialog
-            dialogBuilder.setMessage("Confirm request for $currTotal?")
+            dialogBuilder.setMessage( getString(R.string.confirm_title, currTotal.toString()))
                 // if the dialog is cancelable
                 .setCancelable(false)
                 // positive button text and action
-                .setPositiveButton("Confirm", DialogInterface.OnClickListener {
+                .setPositiveButton(R.string.confirm, DialogInterface.OnClickListener {
                     // Reset all variables in recyclerview
                     _, _ -> sharedViewModel.resetOrder()
                 })
                 // negative button text and action
-                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener {
                         dialog, _ -> dialog.cancel()
                 })
 

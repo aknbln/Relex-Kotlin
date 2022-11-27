@@ -61,9 +61,15 @@
     <string name="input_manually">Input Manually</string>
     <string name="take_picture">Take Picture of the Receipt</string>
     <string name="address_notfound">Address not Found!</string>
-    <string name="enter_specific_adress">Please enter a specific address (ex: Austin, Target 78705</string>
+    <string name="enter_specific_adress">Please enter a specific address (ex: Austin, Target 78705)</string>
     <string name="okay">Okay</string>
     <string name="trip_cost1">Trip Cost:</string>
     <string name="receipts">Receipts</string>
+    <string name= "confirm">Confirm</string>
+    <string name= "confirm_title">Confirm request for %1$s $</string>
+    <string name ="cancel">Cancel</string>
+    <string name = "expense_added">Added: %1$s $</string>
+    <string name="empty_expense">Empty Expense</string>
+    <string name = "expense_photo">Must take picture before adding expense</string>
 
 </resources>

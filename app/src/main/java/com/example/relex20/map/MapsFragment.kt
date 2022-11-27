@@ -1,11 +1,13 @@
 package com.example.relex20.map
 
+
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
 import android.location.Address
@@ -21,6 +23,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.relex20.R
 import com.example.relex20.databinding.FragmentMapsBinding
 import com.example.relex20.model.TransactionViewModel
@@ -87,6 +91,23 @@ class MapsFragment : Fragment(){
         val root: View = binding.root
         return root
     }
+
+//    override fun onConfigurationChanged(newConfig: Configuration) {
+//        super.onConfigurationChanged(newConfig)
+//
+//        // Get a layout inflater (inflater from getActivity() or getSupportActivity() works as well)
+//        val inflater = ApplicationProvider.getApplicationContext<Context>()
+//            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val newView: View = inflater.inflate(R.layout.fragment_maps, null)
+//        // This just inflates the view but doesn't add it to any thing.
+//        // You need to add it to the root view of the fragment
+//        val rootView = view as ViewGroup?
+//        // Remove all the existing views from the root view.
+//        // This is also a good place to recycle any resources you won't need anymore
+//        rootView!!.removeAllViews()
+//        rootView.addView(newView)
+//        // Viola, yo have the new view setup
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

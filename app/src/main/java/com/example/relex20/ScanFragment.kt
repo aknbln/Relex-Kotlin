@@ -120,15 +120,15 @@ class ScanFragment : Fragment() {
                     sharedViewModel.updateReceiptCosts(expenseNum)
 
                     // notify user
-                    val toast = Toast.makeText(context, "Added: $expenseString", Toast.LENGTH_SHORT)
+                    val toast = Toast.makeText(context, getString(R.string.expense_added, expenseString), Toast.LENGTH_SHORT)
                     toast.setGravity(Gravity.CENTER, 0, -10)
                     toast.show()
                 } else {
-                    Toast.makeText(context, "Empty Expense", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.empty_expense, Toast.LENGTH_SHORT).show()
                 }
             }
             else {
-                Toast.makeText(context, "Must take picture before adding expense", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.expense_photo, Toast.LENGTH_SHORT).show()
             }
             input.text.clear()
         }
