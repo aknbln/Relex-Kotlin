@@ -95,6 +95,7 @@ class AccountFragment : Fragment() {
                 .setPositiveButton(R.string.confirm, DialogInterface.OnClickListener {
                     // Reset all variables in recyclerview
                     _, _ -> sharedViewModel.resetOrder()
+                    Toast.makeText(context, "Request sent to company for approval!", Toast.LENGTH_LONG).show()
                 })
                 // negative button text and action
                 .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener {

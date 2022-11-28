@@ -64,7 +64,7 @@
     <string name="enter_specific_adress">Please enter a specific address (ex: Austin, Target 78705)</string>
     <string name="okay">Okay</string>
     <string name="trip_cost1">Trip Cost:</string>
-    <string name="receipts">Receipts</string>
+    <string name="receipts">Receipts:</string>
     <string name= "confirm">Confirm</string>
     <string name= "confirm_title">Confirm request for %1$s $</string>
     <string name ="cancel">Cancel</string>
