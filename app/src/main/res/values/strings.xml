@@ -71,5 +71,6 @@
     <string name = "expense_added">Added: %1$s $</string>
     <string name="empty_expense">Empty Expense</string>
     <string name = "expense_photo">Must take picture before adding expense</string>
+    <string name = "requested_exp">Request sent to company for approval!</string>
 
 </resources>
