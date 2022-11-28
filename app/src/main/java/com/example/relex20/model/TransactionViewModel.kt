@@ -162,12 +162,9 @@ class TransactionViewModel : ViewModel() {
     }
 
     fun updateTripCosts(itemPrice: Double) {
-        if(_total.value == null){
-            _tripCosts.value = itemPrice
-        } else {
-            _tripCosts.value = _tripCosts.value!! + itemPrice
 
-        }
+            _tripCosts.value = itemPrice
+
         println("Double is: $itemPrice with type")
         println("new subtotal: " + this._total.value)
     }

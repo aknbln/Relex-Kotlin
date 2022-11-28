@@ -28,10 +28,7 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.relex20.R
 import com.example.relex20.databinding.FragmentMapsBinding
 import com.example.relex20.model.TransactionViewModel
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
@@ -64,7 +61,6 @@ class MapsFragment : Fragment(){
          * user has installed Google Play services and returned to the app.
          */
         mMap = googleMap
-
          val curLocation: android.location.Location? = sharedViewModel.location.value
 
         //Setting the current position on the map
